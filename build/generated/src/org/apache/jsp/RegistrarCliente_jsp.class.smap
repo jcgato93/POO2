@@ -1,0 +1,22 @@
+SMAP
+RegistrarCliente_jsp.java
+JSP
+*S JSP
+*F
++ 0 RegistrarCliente.jsp
+RegistrarCliente.jsp
++ 1 header.html
+header.html
++ 2 navar.html
+navar.html
+*L
+1,6:50
+1#1,3:56
+6#0,10:59
+1#2,34:69
+15#0,58:102
+73:160,3
+74,15:163
+1#1,3:178
+88#0,3:181
+*E
