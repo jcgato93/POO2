@@ -20,7 +20,8 @@
      
      pageContext.setAttribute("lista", lista);
 %>
-        <form id="formActulizaCliente" action="ClientesController" method="POST">
+        <form id="formActulizaCliente" action="ActualizaCliente.jsp" method="POST">
+            <%@include file="navar.html" %> 
         <div class="container">
             <div class="row" style="margin: 1em;">
                 <h1>Atualizar Cliente</h1>                    
@@ -38,32 +39,29 @@
                             <th>Direccion</th>
                             <th>Telefono</th>
                             <th>Email</th>
-                            <th>ClienteId</th>
-                            <th>Editar</th>                            
+                            <th>ClienteId</th>                                                       
                         </tr>
                     </thead>
                     <tbody>
                         <c:forEach var="lista" items="${lista}">
                       
                         <tr>
-                            <td> <input type="text" name="txtIdentificacion" value="${lista.getNum_documento()}" class="form-control" required/></td>
-                            <td> <input type="text" name="txtNombres" value="${lista.getNombres()}" required="" class="form-control"/> </td>
-                            <td> <input type="text" name="txtApellidos" value="${lista.getApellidos()}" required="" class="form-control" /></td>
-                            <td> <select name="ddlTipoDocumento" id="ddlTipoDocumento" class="form-control" >
+                            <td> <input type="text" name="txtIdentificacion" value="${lista.getNum_documento()}" class="form-control"  readonly/></td>
+                            <td> <input type="text" name="txtNombres" value="${lista.getNombres()}" required="" class="form-control" readonly /> </td>
+                            <td> <input type="text" name="txtApellidos" value="${lista.getApellidos()}" required="" class="form-control" readonly /></td>
+                            <td> <select name="ddlTipoDocumento" id="ddlTipoDocumento" class="form-control"  >
                                     <option>CC</option>
                                     <option>CE</option>
                                     <option>PASAPORTE</option>
                                 </select>
                                 
-                            </td>
-                            <td> <input type="text" name="txtDireccion" value="${lista.getDireccion()}" required="" class="form-control" /> </td>
-                            <td> <input type="text" name="txtTelefono" value="${lista.getTelefono()}" required="" class="form-control" /> </td>
-                            <td> <input type="text" name="txtEmail" value="${lista.getEmail()}" required="" class="form-control" /> </td>
+                            </td>                  
+                            <td> <input type="text" name="txtDireccion" value="${lista.getDireccion()}" required="" class="form-control" readonly /> </td>
+                            <td> <input type="text" name="txtTelefono" value="${lista.getTelefono()}" required="" class="form-control" readonly /> </td>
+                            <td> <input type="text" name="txtEmail" value="${lista.getEmail()}" required="" class="form-control" readonly="" /> </td>                          
                             <td>
-                                <input type="text" name="txtClienteId" value="${lista.getClienteId()}" class="form-control" readonly=""/>                                
-                            </td>
-                            <td>
-                                <input type="submit" value="Editar" name="btnSubmit" class="btn btn-warning" />
+                                <button type="submit" value="${lista.getClienteId()}" name="btnSubmit" class="btn btn-warning">Actualizar</button>
+                                
                             </td>
                         </tr>
                          </c:forEach> 
@@ -78,14 +76,23 @@
                     
         </div>
        </form>
-        
-       <script>
-         $(document).ready(funtion()
-         {
-            $("#ddlTipoDocumento").prop('select',${lista.getTipo_documento()});
-             
-         });
-     </script>
+        <script>
+            $(document).ready(function(){
+                
+               try {
+                var respuesta='${result}';
+                
+                if(respuesta==""){}
+                else{alert(respuesta);}
+                
+                
+                } catch (e) {
+
+                }               
+            });
+            
+        </script>
+  
     </body>
      <%@include file="header.html" %>
      

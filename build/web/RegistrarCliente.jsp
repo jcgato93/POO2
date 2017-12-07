@@ -70,7 +70,7 @@
             $(document).ready(function(){
                 
                try {
-                var respuesta='${mensaje}';
+                var respuesta='${result}';
                 
                 if(respuesta==""){}
                 else{alert(respuesta);}

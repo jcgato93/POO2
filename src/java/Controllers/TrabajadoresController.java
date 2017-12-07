@@ -4,8 +4,7 @@
  * and open the template in the editor.
  */
 package Controllers;
-
-import Models.Clientes;
+import Models.Trabajadores;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -16,10 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author GATO
+ * @author ACER
  */
-@WebServlet(name = "Clientes", urlPatterns = {"/Clientes"})
-public class ClientesController extends HttpServlet {
+@WebServlet(name = "Trabajadores", urlPatterns = {"/Trabajadores"})
+public class TrabajadoresController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,56 +32,39 @@ public class ClientesController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-    
-          String operacion=request.getParameter("btnSubmit");
+        
+         String operacion=request.getParameter("btnSubmit");
         
         switch(operacion)
         {
             case "Registrar":
-                Clientes cliente=new Clientes();
+                Trabajadores Trabajadores=new Trabajadores();
                 
-                cliente.setApellidos(request.getParameter("txtApellidos"));
-                cliente.setNombres(request.getParameter("txtNombres"));
-                cliente.setTipo_documento(request.getParameter("ddlTipoDocumento"));
-                cliente.setNum_documento(request.getParameter("txtNumDocumento"));
-                cliente.setDireccion(request.getParameter("txtDireccion"));
-                cliente.setTelefono(request.getParameter("txtTelefono"));
-                try {
-                    cliente.setEmail(request.getParameter("txtEmail"));
-                } catch (Exception e) {
-                    cliente.setEmail("");
-                }
-                
-                String result= cliente.insertar(cliente);
+                Trabajadores.setNombres(request.getParameter("txtNombres"));
+                Trabajadores.setApellidos(request.getParameter("txtApellidos"));
+                Trabajadores.setTipo_documento(request.getParameter("ddlTipoDocumento"));
+                Trabajadores.setNum_documento(request.getParameter("txtNumDocumento"));
+                Trabajadores.setDireccion(request.getParameter("txtDireccion"));
+                Trabajadores.setTelefono(request.getParameter("txtTelefono"));
+                Trabajadores.setEmail(request.getParameter("txtEmail"));
+                Trabajadores.setSueldo(request.getParameter("txtSueldo"));
+                Trabajadores.setRol(request.getParameter("txtRol"));
+                Trabajadores.setLogin(request.getParameter("txtLogin"));
+                Trabajadores.setPassword(request.getParameter("txtPassword"));
+               
+                                
+                String result= Trabajadores.insertar(Trabajadores);
                 
                 // para crear variables que se envian por el response
-                request.setAttribute("result",result);
+                request.setAttribute("mensaje",result);
                 //para redicionar y enviar las variables
-                request.getRequestDispatcher("RegistrarCliente.jsp").forward(request, response);
+                request.getRequestDispatcher("RegistrarTrabajadores.jsp").forward(request, response);
                 
                 break;
                 
             case "Actualizar":
-        cliente=new Clientes();
-        
-        cliente.setClienteId(Integer.parseInt(request.getParameter("txtClienteId")));
-        cliente.setNum_documento(request.getParameter("txtNumDocumento"));
-        cliente.setNombres(request.getParameter("txtNombres"));
-        cliente.setApellidos(request.getParameter("txtApellidos"));
-        cliente.setTipo_documento(request.getParameter("ddlTipoDocumento"));
-        cliente.setDireccion(request.getParameter("txtDireccion"));
-        cliente.setTelefono(request.getParameter("txtTelefono"));
-        cliente.setEmail(request.getParameter("txtEmail"));
-        
-         result=  cliente.actualizar(cliente.getClienteId(), cliente);
-        
-        // para crear variables que se envian por el response
-        request.setAttribute("result",result);
-        //para redicionar y enviar las variables
-        request.getRequestDispatcher("TablaClientes.jsp").forward(request, response);
                 break;
         }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

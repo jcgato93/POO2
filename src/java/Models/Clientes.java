@@ -176,7 +176,7 @@ public class Clientes {
     * @param identificacion
     * @return 
     */
-   public Clientes getClientes(int identificacion) {
+   public Clientes getClientes(int clienteId) {
        
         Clientes clientes=new Clientes();
         
@@ -188,7 +188,7 @@ public class Clientes {
         ",[direccion]" +
         ",[telefono]" +
         ",[email] " +
-        "FROM [basereserva] WHERE num_documento="+identificacion;
+        "FROM [clientes] WHERE clienteId="+clienteId;
 
         try {
             PreparedStatement st = con.prepareStatement(query);
@@ -252,10 +252,16 @@ public class Clientes {
             
             
      //=======================ACTUALIZAR DATOS===============================================
+    /**
+     * Actualiza la informacion de un Cliente
+     * @param ClienteId
+     * @param datosCliente
+     * @return 
+     */
     public String actualizar(int ClienteId,Clientes datosCliente) {
       
         String result="";
-        query = "UPDATE persona "
+        query = "UPDATE clientes "
                 + "SET nombres=?,"
                 + "apellidos=?,"
                 + "tipo_documento=?,"
