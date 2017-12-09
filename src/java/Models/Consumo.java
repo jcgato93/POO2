@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 
 public class Consumo {
@@ -93,6 +95,73 @@ public class Consumo {
                 lista.add(consumo);
             }
            
+
+        } catch (Exception e) {
+            lista=null;            
+        }
+         return lista;
+        
+        }
+   
+   
+       /**
+        * obtine los consumos de un cliente con
+        * el numero de identificacion
+        * @param numIdentificacion
+        * @return 
+        */
+   public JSONObject getConsumos(String numIdentificacion) {
+        JSONObject lista;
+        
+        lista = new JSONObject();
+        
+        
+        query ="select max(reserva.reservaId) as reservaId from clientes left join reserva ON clientes.clienteId=reserva.clienteId where clientes.num_documento=?";
+
+        try {
+            PreparedStatement st = con.prepareStatement(query);
+
+            st.setString(1, numIdentificacion);
+            
+            ResultSet rs = st.executeQuery();
+        
+            int reservaident=0;
+            
+            while (rs.next()) {
+                reservaident=rs.getInt("reservaId");                                
+            }
+                                   
+            if(reservaident!=0)
+            {
+             query="select producto.nombre, producto.precio_venta,consumo.cantidad,consumo.estado from reserva left join consumo on reserva.reservaId=consumo.reservaId left join producto on producto.productoId=consumo.productoId where reserva.reservaId="+reservaident;
+             
+             st = con.prepareStatement(query);
+
+             rs = st.executeQuery();
+             
+             JSONArray consumos=new JSONArray();
+             JSONObject detalle;
+             while (rs.next())
+             {
+                 detalle=new JSONObject();
+                 detalle.put("nombre",rs.getString("nombre"));
+                 detalle.put("precio",rs.getString("precio_venta"));
+                 detalle.put("cantidad",rs.getString("cantidad"));
+                 detalle.put("estado", rs.getString("estado"));
+                 
+                 consumos.add(detalle);
+             }
+             
+             
+             lista.put("consumos",consumos);
+             lista.put("reservaId",reservaident);
+            }
+            else
+            {                
+             lista=null;
+            }
+            
+            
 
         } catch (Exception e) {
             lista=null;            
