@@ -87,6 +87,7 @@ public class Producto {
             ResultSet rs = st.executeQuery();
 
             while (rs.next()) {
+                producto=new Producto();
                 producto.setProductoId(rs.getInt("productoId"));  
                 producto.setNombre(rs.getString("nombre"));  
                 producto.setDescripcion(rs.getString("descripcion"));  

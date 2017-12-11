@@ -114,7 +114,7 @@ public class Consumo {
         JSONObject lista;
         
         lista = new JSONObject();
-        
+        JSONArray consumos=new JSONArray();
         
         query ="select max(reserva.reservaId) as reservaId from clientes left join reserva ON clientes.clienteId=reserva.clienteId where clientes.num_documento=?";
 
@@ -130,7 +130,11 @@ public class Consumo {
             while (rs.next()) {
                 reservaident=rs.getInt("reservaId");                                
             }
-                                   
+               
+            
+            lista.put("reservaId",reservaident);   
+               
+               lista.put("consumos",consumos);
             if(reservaident!=0)
             {
              query="select producto.nombre, producto.precio_venta,consumo.cantidad,consumo.estado from reserva left join consumo on reserva.reservaId=consumo.reservaId left join producto on producto.productoId=consumo.productoId where reserva.reservaId="+reservaident;
@@ -139,7 +143,7 @@ public class Consumo {
 
              rs = st.executeQuery();
              
-             JSONArray consumos=new JSONArray();
+             
              JSONObject detalle;
              while (rs.next())
              {
@@ -153,8 +157,8 @@ public class Consumo {
              }
              
              
-             lista.put("consumos",consumos);
-             lista.put("reservaId",reservaident);
+             
+             
             }
             else
             {                
