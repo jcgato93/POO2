@@ -3,11 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/GATO/Documents/NetBeansProjects/POO2/web/RegistrarPedido.jsp</file>
-            <file>file:/C:/Users/GATO/Documents/NetBeansProjects/POO2/src/java/Models/Producto.java</file>
-            <file>file:/C:/Users/GATO/Documents/NetBeansProjects/POO2/web/ActualizaCliente.jsp</file>
-            <file>file:/C:/Users/GATO/Documents/NetBeansProjects/POO2/src/java/Models/Consumo.java</file>
-            <file>file:/C:/Users/GATO/Documents/NetBeansProjects/POO2/src/java/Controllers/ConsumoController.java</file>
+            <file>file:/C:/Users/Workgroup/Documents/GitHub/POO2/src/java/Models/Reserva.java</file>
+            <file>file:/C:/Users/Workgroup/Documents/GitHub/POO2/web/RegistrarReserva.jsp</file>
         </group>
     </open-files>
 </project-private>

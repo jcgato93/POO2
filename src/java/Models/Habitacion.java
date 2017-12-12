@@ -109,6 +109,7 @@ public class Habitacion {
             ResultSet rs = st.executeQuery();
 
             while (rs.next()) {
+                habitaciones=new Habitacion();
                 habitaciones.setHabitacionId(rs.getInt("habitacionId"));  
                 habitaciones.setNumero(rs.getString("numero"));
                 habitaciones.setPiso(rs.getString("piso"));
